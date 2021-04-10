@@ -20,10 +20,10 @@ directory names typically used in extensions.
 
 .. important::
 
-   Since the :file:`ext_tables.php` and :file:`ext_localconf.php` of
-   every extension will be concatenated together by TYPO3, you MUST
-   follow some rules, such as not use :php:`use` or :php:`declare(strict_types=1)`
-   inside these files, see :ref:`rules_ext_tables_localconf_php`.
+Since the :file:`ext_tables.php` and :file:`ext_localconf.php` of
+every extension will be concatenated together by TYPO3, you MUST
+follow some rules, such as not use :php:`use` or :php:`declare(strict_types=1)`
+inside these files, see :ref:`rules_ext_tables_localconf_php`.
 
 .. _ext-localconf-php:
 
@@ -58,6 +58,7 @@ Registering :ref:`hooks or signals <hooks-concept>`, :ref:`XCLASSes
 * locales
 * stream wrapper
 * :ref:`error handler <error-handling-extending>`
+* calling `\TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin()`. They should go in `Configuration/TCA/Overrides/tt_content.php`
 
 This would not work because the extension files :file:`ext_localconf.php` are
 included (:php:`loadTypo3LoadedExtAndExtLocalconf`) after the creation of the
@@ -69,7 +70,7 @@ Example:
 
 :ref:`Register an exception handler <error-handling-extending>` in :file:`typo3conf/AdditionalConfiguration.php`::
 
-   $GLOBALS['TYPO3_CONF_VARS']['SYS']['debugExceptionHandler'] = \Vendor\Ext\Error\PostExceptionsOnTwitter::class;
+$GLOBALS['TYPO3_CONF_VARS']['SYS']['debugExceptionHandler'] = \Vendor\Ext\Error\PostExceptionsOnTwitter::class;
 
 Should Be Used For
 ------------------
@@ -85,6 +86,7 @@ These are the typical functions that extension authors should place within :file
 * Adding reports to the reports module
 * Registering Icons to the :ref:`IconRegistry <icon-registration>`
 * Registering Services via the :ref:`Service API <services-developer-service-api>`
+* Configuring Plugin via `\TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin()`
 
 deprecated
 
